@@ -1,22 +1,18 @@
 # agent-memory-stack
 
-**An agent that stops re-asking what you've answered and re-deriving what
-you've decided.** A markdown-only memory architecture for long-running CLI
-agents, organized by time horizon and read pattern so knowledge compounds
-across sessions instead of resetting.
+A markdown memory architecture for long-running CLI agents, designed
+around time horizon, read pattern, and human-agent knowledge compounding.
+The point: an agent that stops re-asking what you've answered and
+re-deriving what you've decided.
 
-Zero dependencies for the core. Works on any OS, with Claude Code, Codex,
-or any agent that reads a rulebook file at session start.
+Zero dependencies for the core. Works on any OS.
 
-> **Status:** early (v0.1). The model is stable; file layout and tooling
-> may still change. The protocol is versioned (see `PROTOCOL.md`) so you
-> can pin a contract. Changes are tracked in `CHANGELOG.md`.
+> **Status:** early (v0.1). The model is stable; layout and tooling may
+> still change. `PROTOCOL.md` is versioned so you can pin it.
 
-**Start here:** [`QUICKSTART.md`](QUICKSTART.md) , a working compounding
-stack in ~15 minutes, no dependencies. Then
-[`examples/loop-walkthrough.md`](examples/loop-walkthrough.md) to see the
-payoff, and [`distillation.md`](distillation.md) for the engine that makes
-it compound.
+**Start here:** [`QUICKSTART.md`](QUICKSTART.md) , a working stack in ~15
+minutes. Then [`examples/loop-walkthrough.md`](examples/loop-walkthrough.md)
+to see the payoff and [`distillation.md`](distillation.md) for the engine.
 
 ## The problem
 
@@ -32,12 +28,6 @@ knows where to write something and where to read it back. The internal
 summarizer stops being the load-bearing component.
 
 ## The model
-
-Four agent-internal layers, plus two optional layers that bridge to a
-personal note system. Working memory (the live conversation) is the
-substrate the other layers feed, not a layer you configure , so in
-practice you maintain **three core files** (identity, session log,
-distilled memory) and, optionally, a vault and wiki.
 
 Layers are organized by **time horizon** (how recent is the information?)
 and **read pattern** (when does the agent look at it?). Each answers a
