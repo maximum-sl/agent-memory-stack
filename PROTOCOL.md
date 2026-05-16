@@ -1,8 +1,26 @@
 # PROTOCOL.md
 
+**Protocol version: 1**
+
 If you are an agent operating in a project that uses agent-memory-stack,
 this file describes what to read, when to read it, and what to write,
-per layer.
+per layer. This file is the source of truth for read/write behavior; any
+table elsewhere (README, implementation guides) is a summary of it.
+
+## Versioning
+
+The protocol is versioned so adopters can target a stable contract. A
+project can state "agent-memory-stack protocol v1" and rely on the read/write
+rules below not changing under it.
+
+- **Patch** (1 → 1, wording only): clarifications, no behavior change.
+- **Minor** (1 → 1.x): additive , a new optional layer or rule that does
+  not change existing behavior. Existing v1 setups keep working unchanged.
+- **Major** (1 → 2): a breaking change to where something is read/written
+  or when. Documented in `CHANGELOG.md` with a migration note.
+
+If your project pins a version, check `CHANGELOG.md` before adopting a
+higher one.
 
 ## Conventions
 
