@@ -5,27 +5,19 @@ around time horizon, read pattern, and human-agent knowledge compounding.
 The point: an agent that stops re-asking what you've answered and
 re-deriving what you've decided.
 
-Zero dependencies for the core. Works on any OS.
-
-> **Status:** early (v0.1). The model is stable; layout and tooling may
-> still change. `PROTOCOL.md` is versioned so you can pin it.
-
-**Start here:** [`QUICKSTART.md`](QUICKSTART.md) , a working stack in ~15
-minutes. Then [`examples/loop-walkthrough.md`](examples/loop-walkthrough.md)
-to see the payoff and [`distillation.md`](distillation.md) for the engine.
+Works with Claude Code and Codex.
 
 ## The problem
 
 Every long-running agent eventually loses information that mattered. Either
-context fills up and a built-in summarizer compresses it lossily, or the
+context fills up and a built-in summarizer compresses it, or the
 session ends and the next session starts blind. Either way, the agent
 re-asks questions you've already answered and re-derives decisions you've
 already made.
 
-This stack gives every piece of information a defined home, a defined
+This stack gives every piece of information a defined home, a
 read/write pattern, and a defined time when it loads. The agent always
-knows where to write something and where to read it back. The internal
-summarizer stops being the load-bearing component.
+knows where to write something and where to read it back.
 
 ## The model
 
@@ -151,7 +143,7 @@ An LLM-maintained knowledge graph layered on top of the vault. Raw sources
 (people.md, companies.md, products/X.md) get updated, cross-linked, and
 de-duplicated. Inspired by Karpathy's LLM Wiki pattern.
 
-The wiki is not merely retrieval. It's compiled and maintained
+The wiki is not just retrieval. It's compiled and maintained
 knowledge: the LLM integrates each new source into existing entity
 pages at ingest time, updates cross-references, and can flag
 contradictions. Synthesis happens at compile time, not query time. Each
@@ -183,7 +175,7 @@ This stack synthesizes existing patterns. Specific debts:
 
 Layered memory architectures exist (MemGPT, Generative Agents). PKM-LLM
 bridges exist (Karpathy's wiki and others). Daily session logging exists
-(every productivity system). What hasn't existed is a single
+(every productivity system). This is a single
 operator-friendly system that combines them with clean boundaries and
 explicit read rules.
 
@@ -258,11 +250,6 @@ What this stack does not solve, in the current shape:
 - **No privacy/sensitivity tiers.** All layers are plaintext markdown. If
   you have sensitive data (financial, medical, client confidential), keep
   it outside this stack or build a separate encrypted tier.
-- **Wiki has no provenance verification.** Layer 6 inherits Karpathy's
-  LLM Wiki pattern's biggest weakness: the LLM can hallucinate during
-  ingest, and there's no automatic mechanism to verify claims against
-  source material. Mitigations: cite sources in entity pages, run
-  periodic re-ingest with diff review.
 
 ## License
 
