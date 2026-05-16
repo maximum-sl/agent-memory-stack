@@ -88,6 +88,37 @@ higher one.
   updates relevant entity pages, including cross-references and any
   contradiction notes.
 
+## Recall ladder
+
+The layer sections above say *where* each thing lives. This says *how to
+find* something from the past when the user asks ("what did we decide
+about X?", "have we talked about Y?"). Recall is a **cheapest-source-first
+ladder**, not an automatic jump to search. Walk it in order, stop at the
+first rung that actually answers, escalate only if it doesn't.
+
+- **Rung 0 , already-loaded context (zero cost, instant).** Check what is
+  already in this session before retrieving anything: the injected snapshot
+  (identity, distilled memory, today's and , if loaded , yesterday's
+  session log, especially their Open threads / Pending user asks). If the
+  answer is here, use it. Do not search for something already in context.
+- **Rung 1 , session logs.** Not in context: read/grep `sessions/` ,
+  yesterday's, then back through recent days, for the relevant decision or
+  thread.
+- **Rung 2 , semantic index (only if you maintain one).** If the corpus is
+  too large for rung 1 and you have the optional retrieval layer (see
+  README "Known limitations"), query it by meaning. Not part of the
+  markdown-only core; skip this rung if you don't run one.
+- **Rung 3 , raw.** Last resort: the full raw session text / vault sources,
+  for an exact quote or detail the summaries dropped.
+
+The two failure modes are symmetric and both matter: spending a search
+when the answer was already in loaded context (wasteful, slow), and
+answering a "have we decided" question from rung 0 alone when it was
+actually settled earlier and only a deeper rung would surface it (wrong).
+On directional or "have we discussed this" questions, escalate past rung 0
+before answering , do not contradict or re-derive a past decision without
+checking.
+
 ## Layer-by-layer summary
 
 | Layer | When to read | When to write |

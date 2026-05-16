@@ -13,6 +13,11 @@ Protocol version: **1** (unchanged , all changes below are additive or
 documentation).
 
 ### Added
+- **Recall ladder** in `PROTOCOL.md` , a cheapest-source-first retrieval
+  procedure (loaded context → session logs → optional index → raw),
+  closing the under-specified recall axis. Additive, protocol stays v1.
+- "Store, inject, recall" lens in the README , maps the layers onto the
+  three operations every memory system must answer.
 - `QUICKSTART.md` , a zero-dependency path to a working compounding stack
   in ~15 minutes, ending with an explicit acceptance test.
 - `install.sh` , idempotent, dependency-free scaffolder for the Core tier

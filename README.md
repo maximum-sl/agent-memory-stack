@@ -58,6 +58,26 @@ knowledge and only apply if you maintain a personal note system
 operates entirely on layers 1-4. Together they cover everything from
 "who am I" to "what does the user think about Topic Z."
 
+### Store, inject, recall
+
+Another way to read the same stack: every memory system has to answer
+three operational questions, and each maps onto these layers.
+
+- **Store** , when and how does something worth keeping get written? Here:
+  the session log (layer 3) during work, consolidated into distilled
+  memory (layer 4) periodically. See [`distillation.md`](distillation.md).
+- **Inject** , what small, curated set is always loaded at session start
+  so the agent already knows it? Here: identity (layer 1) + distilled
+  memory (layer 4) + the recent session log , the frozen snapshot in the
+  heartbeat. The point is a lean snippet, not more context.
+- **Recall** , how is older information found when asked for? Here: a
+  cheapest-source-first ladder , already-loaded context, then session
+  logs, then an optional index, then raw. `PROTOCOL.md` defines the rungs
+  ("Recall ladder"). This is the rung most memory setups get wrong.
+
+If you only remember one thing: recall is a ladder you climb only as far
+as you must, not an automatic search.
+
 ## The six layers
 
 ### 1. Identity
