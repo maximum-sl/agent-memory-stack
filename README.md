@@ -1,8 +1,22 @@
 # agent-memory-stack
 
-This is a six-layer memory architecture for long-running CLI agents,
-designed around time horizon, read pattern, and human-agent knowledge
-compounding.
+**An agent that stops re-asking what you've answered and re-deriving what
+you've decided.** A markdown-only memory architecture for long-running CLI
+agents, organized by time horizon and read pattern so knowledge compounds
+across sessions instead of resetting.
+
+Zero dependencies for the core. Works on any OS, with Claude Code, Codex,
+or any agent that reads a rulebook file at session start.
+
+> **Status:** early (v0.1). The model is stable; file layout and tooling
+> may still change. The protocol is versioned (see `PROTOCOL.md`) so you
+> can pin a contract. Changes are tracked in `CHANGELOG.md`.
+
+**Start here:** [`QUICKSTART.md`](QUICKSTART.md) , a working compounding
+stack in ~15 minutes, no dependencies. Then
+[`examples/loop-walkthrough.md`](examples/loop-walkthrough.md) to see the
+payoff, and [`distillation.md`](distillation.md) for the engine that makes
+it compound.
 
 ## The problem
 
@@ -12,16 +26,22 @@ session ends and the next session starts blind. Either way, the agent
 re-asks questions you've already answered and re-derives decisions you've
 already made.
 
-This stack splits memory into six layers, each with a defined role and
-a defined read/write pattern. The agent always knows where to write a
-given piece of information, where to read it back from, and when. The
-internal summarizer stops being the load-bearing component.
+This stack gives every piece of information a defined home, a defined
+read/write pattern, and a defined time when it loads. The agent always
+knows where to write something and where to read it back. The internal
+summarizer stops being the load-bearing component.
 
 ## The model
 
-Memory is layered by **time horizon** (how recent is the information?) and
-**read pattern** (when does the agent look at it?). Each layer answers a
-different question.
+Four agent-internal layers, plus two optional layers that bridge to a
+personal note system. Working memory (the live conversation) is the
+substrate the other layers feed, not a layer you configure , so in
+practice you maintain **three core files** (identity, session log,
+distilled memory) and, optionally, a vault and wiki.
+
+Layers are organized by **time horizon** (how recent is the information?)
+and **read pattern** (when does the agent look at it?). Each answers a
+different question:
 
 | # | Layer | Question | Read |
 |---|---|---|---|
@@ -201,10 +221,12 @@ to copy from.
 
 ## PROTOCOL.md
 
-[`PROTOCOL.md`](PROTOCOL.md) is the agent-readable companion. It states,
-per layer, when to read, when to write, and what format to use. If you
-want a friend's agent to adopt this stack, point it at PROTOCOL.md and
-the templates.
+[`PROTOCOL.md`](PROTOCOL.md) is the agent-readable companion and the
+**source of truth** for read/write behavior. The per-layer table above is
+a summary of it; if they ever disagree, PROTOCOL.md wins. It is versioned
+so a project can pin a contract. If you want a friend's agent to adopt this
+stack, point it at PROTOCOL.md and the templates (or just run
+`install.sh`).
 
 ## Known limitations
 
